@@ -1,0 +1,39 @@
+from django.shortcuts import render,redirect
+from .forms import RegisterForm
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth import authenticate
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
+ 
+from courses.models import Teachers,Users_Extended
+
+def register(request):
+    if(request.method == "POST"):
+        form = RegisterForm(request.POST)
+        if(form.is_valid()):
+            form.save()
+            messages.success(request,"Your Account has Been Created!")
+            return redirect('/accounts/login')
+        else:
+            messages.warning(request,"One Of The Fields Had A Problem!")
+
+    form = RegisterForm()
+    return render(request, "register.html", {'form' : form})
+
+@login_required
+def profile(request):
+    is_teacher = Teachers.objects.filter(user_id=request.user.id)
+    print(is_teacher == None)
+    if len(is_teacher) == 0:
+        teacher_flag = 0
+    else:
+        teacher_flag = 1
+
+    courses_taken = Users_Extended.objects.filter(user_id=request.user.id)
+    return render(request, "profile.html",{"is_teacher" : teacher_flag , "courses_taken" : courses_taken})
+
+@login_required
+def user_to_teacher(request):
+
+    return render(request, "about.html")

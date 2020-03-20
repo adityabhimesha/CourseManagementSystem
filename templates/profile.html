@@ -1,0 +1,114 @@
+{% extends "base.html" %} {% block content %} {% load static %}
+<!-- - ================================================================================== -->
+
+<div class="site-section ftco-subscribe-1 site-blocks-cover pb-4" style="background-image: url('{% static " images/course_3.jpg " %}')">
+    <div class="container">
+        <div class="row align-items-end">
+            <div class="col-lg-7">
+                <h2 class="mb-0">My Profile</h2>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="custom-breadcrumns border-bottom">
+    <div class="container">
+        <a href="/home/">Home</a>
+        <span class="mx-3 icon-keyboard_arrow_right"></span>
+        <span class="current">My Profile</span>
+    </div>
+</div>
+<!-- <h1 style="margin-top:20%;"> sikeeeeee </h1>{{ request.path }} -->
+
+<div class="container mb-5">
+    {% if is_teacher %}
+        <div class="row mt-5 mb-5">
+            <div class="col-sm-12">
+                <h4 style="color:black;font-weight:bold;">Add OR Edit Your Courses-></h4><nobr style="white-space:nowrap;">
+                <a class="small btn btn-primary" href="{% url 'user_to_teacher' %}">Click Here</a>
+            </div>
+        </div>
+    {% else %}
+        <div class="row centered mt-5" style="margin-bottom:10%;">
+            <div class="col-sm-8 pt-1">
+                <h5 class="text-primary">Let the World Know Your Talents And Help Them Learn It Too!</h5>
+            </div>
+            <div class="col-sm-4">
+                <a class="small btn btn-primary" href="{% url 'user_to_teacher' %}">Become A Teacher!</a>
+            </div>
+        </div>
+    {% endif %}
+
+    <div class="row">
+
+        <div class="col-sm-12 col-lg-6" style="color:black;font-weight:bold;">
+            <h2 class="text-primary mt-3">Personal Details</h2>
+            <table class="mt-5">
+                <tr class="mt-3">
+                    <td style="padding-top:7%;">
+                        <h4>Username: {{user.username|title}}</h4>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="padding-top:7%;">
+                        <h4>First Name: {{user.first_name|title}}</h4>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="padding-top:7%;">
+                        <h4>Second Name: {{user.last_name|title}}</h4>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="padding-top:7%;">
+                        <h4>Email: {{user.email|title}}</h4>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="padding-top:7%;">
+                        <h4>Date Joined: {{user.date_joined|date:"D, d M, Y"}}</h4>
+                    </td>
+                </tr>
+            </table>
+
+        </div>
+
+        <div class="col-sm-12 col-lg-6" style="color:black;font-weight:bold;">
+            <h2 class="text-primary mt-3">Courses Enrolled In</h2>
+            <table class="mt-4">
+                {% if courses_taken %} {% for course in courses_taken %}
+                <tr class="mt-3" style="border-bottom:2px solid #AAAAAA; border-radius:5%;">
+                    <td style="padding-top:7%;">
+                        <h4>{{course.courses_enrolled.title}}</h4>
+                        <a href="">
+                            <div class="btn btn-dark pt-1">Continue</div>
+                        </a>
+                        <hr style="opacity:0;">
+                    </td>
+                </tr>
+                {% endfor %} {% else %}
+               
+                <tr class="mt-5">
+                    <td style="padding-top:7%;color:grey;">
+                        <h4>No Courses Taken Yet!!</h4>
+                    </td>
+                </tr>
+                {% endif %}
+
+
+
+            </table>
+
+        </div>
+
+
+
+    </div>
+</div>
+
+
+<!-- - ================================================================================== -->
+
+{% endblock %}
