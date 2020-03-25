@@ -1,7 +1,7 @@
 from django.shortcuts import render,redirect
 from .forms import ContactForm
 from django.contrib.auth.decorators import login_required
-from courses.models import Courses
+from courses.models import Courses,Teachers
 
 
 def redirect_home(request):
@@ -29,7 +29,8 @@ def courses_test(request):
     return render(request, "courses.html")
 
 def about_test(request):
-    return render(request, "about.html")
+    teachers = Teachers.objects.all()
+    return render(request, "about.html", {"teachers" : teachers})
 
 
 def login(request):

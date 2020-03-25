@@ -7,11 +7,10 @@ from django.contrib.auth.decorators import login_required
 # Create your views here.
 def all_courses(request):
     is_teacher = Teachers.objects.filter(user_id=request.user.id)
-    print(is_teacher == None)
-    if len(is_teacher) == 0:
-        teacher_flag = 0
-    else:
+    if len(is_teacher) == 1:
         teacher_flag = 1
+    else:
+        teacher_flag = 0
 
     courses_taken = Users_Extended.objects.filter(user_id=request.user.id)
     all_courses = Courses.objects.all()

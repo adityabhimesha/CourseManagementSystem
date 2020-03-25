@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect
-from .forms import RegisterForm
+from .forms import RegisterForm,TeacherForm
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import authenticate
 from django.contrib import messages
@@ -25,10 +25,10 @@ def register(request):
 def profile(request):
     is_teacher = Teachers.objects.filter(user_id=request.user.id)
     print(is_teacher == None)
-    if len(is_teacher) == 0:
-        teacher_flag = 0
-    else:
+    if len(is_teacher) == 1:
         teacher_flag = 1
+    else:
+        teacher_flag = 0
 
     courses_taken = Users_Extended.objects.filter(user_id=request.user.id)
     return render(request, "profile.html",{"is_teacher" : teacher_flag , "courses_taken" : courses_taken})
@@ -36,4 +36,19 @@ def profile(request):
 @login_required
 def user_to_teacher(request):
 
-    return render(request, "about.html")
+    if(request.method == "POST"):
+        form = TeacherForm(request.POST, request.FILES)
+        user_form = form.save(commit=False)
+        user_form.user_id = request.user
+        user_form.save()
+        
+        return redirect('/accounts/profile/edit-courses')
+
+    is_teacher = Teachers.objects.filter(user_id=request.user.id)
+    if len(is_teacher) == 1:
+        teacher_flag = 1
+    else:
+        teacher_flag = 0
+
+    form = TeacherForm()
+    return render(request, "become-a-teacher.html", {"teacher_flag" : teacher_flag, "form" : form})

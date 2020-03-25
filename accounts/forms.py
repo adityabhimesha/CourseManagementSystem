@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+from courses.models import Teachers
 
 class RegisterForm(UserCreationForm):
     email = forms.EmailField(required=True)
@@ -25,3 +26,11 @@ class RegisterForm(UserCreationForm):
         if commit:
             user.save()
         return user
+
+class TeacherForm(forms.ModelForm):
+
+    class Meta:
+        model = Teachers
+        fields = ("category",
+                  "age",
+                  "profile_pic")
