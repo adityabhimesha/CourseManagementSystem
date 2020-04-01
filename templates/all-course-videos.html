@@ -1,0 +1,52 @@
+{% extends "base.html" %} {% block content %} {% load static %}
+<!-- - ================================================================================== -->
+<div class="site-section ftco-subscribe-1 site-blocks-cover pb-4" style="background-image: url('{% static "images/course_6.jpg" %}')">
+    <div class="container">
+        <div class="row align-items-end">
+            <div class="col-lg-7">
+                <h2 class="mb-0">{{course.title}}</h2>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="custom-breadcrumns border-bottom">
+    <div class="container">
+        <a href="/home/">Home</a>
+        <span class="mx-3 icon-keyboard_arrow_right"></span>
+        <span class="current">Courses</span>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row mt-2 mb-1">
+        {% if messages %}
+        <div class="col-sm-12 messages">
+            {% for message in messages %}
+            <div{% if message.tags %} class="alert alert-{{ message.tags }} px-auto" {% endif %}>{{ message }}</div>
+        {% endfor %}
+    </div>
+    {% endif %}
+</div>
+<div class="row mt-2 mb-5 mr-auto ml-auto">
+    <h4 style="color:grey;font-size:1.5rem;"><b>Start Learning Now--></b></h4>
+</div>
+
+<div class="row mt-5 mb-5">
+    {% for video in videos %}
+    <div class="col-sm-12 col-md-4 ml-auto mr-auto mt-3" style="overflow: hidden;margin:0;padding:0;z-index:0;">
+        <div class="course-1-item">
+            <figure class="thumnail">
+                <a href="{% url 'specific_video' course_id=course.id video_id=video.id %}"><img src="{{video.thumbnail.url}}" alt="Image" style="width:100%;height:30%;" class="img-responsive fit-image"></a>
+                <div class="category mx-auto" style="z-index:5;">
+                    <h3 style="color:black">{{video.video_number}}. {{video.name}}</h3>
+                </div>
+            </figure>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+</div>
+
+{% endblock %}

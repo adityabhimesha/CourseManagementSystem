@@ -142,17 +142,17 @@
                             {% for course in courses|slice:":5" %}
                                 <div class="course-1-item">
                                     <figure class="thumnail">
-                                    <a href="course-single.html"><img src="{{course.image.url}}" alt="Image" class="img-fluid"></a>
-                                    <div class="price">${{course.price}}</div>
-                                    <div class="category"><h3>{{course.teacher_id.category}}</h3></div>  
+                                        <a href="course-single.html"><img src="{{course.image.url}}" alt="Image" height="250" class=""></a>
+                                        <div class="price">${{course.price}}</div>
+                                        <div class="category"><h3>{{course.teacher_id.category}}</h3></div>  
                                     </figure>
-                                    <div class="course-1-content pb-4">
-                                    <h2>{{course.title}}</h2>
-                                    <div class="rating text-center mb-3 text-dark">
-                                        Rating - {{course.avg_rating}} out of 5
-                                    </div>
-                                    <p class="desc mb-4 mt-2">{{course.brief_desc}}</p>
-                                    <p><a href="/courses/{{course.id}}/" class="btn btn-primary rounded-0 px-4">Enroll In This Course</a></p>
+                                    <div class="flex course-1-content pb-4">
+                                        <h2 style="margin-top:auto;">{{course.title}}</h2>
+                                        <div class="rating text-center mb-3 text-dark">
+                                            Rating - {{course.avg_rating}} out of 5
+                                        </div>
+                                        <p class="desc mb-4 mt-2">{{course.brief_desc}}</p>
+                                        <p class="sticky-bottom"><a href="/courses/{{course.id}}/" class="btn btn-primary rounded-0 px-4">Enroll In This Course</a></p>
                                     </div>
                                 </div>
                             {% endfor %}

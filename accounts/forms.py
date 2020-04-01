@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from courses.models import Teachers
+from courses.models import Teachers,Courses,Videos
 
 class RegisterForm(UserCreationForm):
     email = forms.EmailField(required=True)
@@ -34,3 +34,29 @@ class TeacherForm(forms.ModelForm):
         fields = ("category",
                   "age",
                   "profile_pic")
+
+class EditCourseDetails(forms.ModelForm):
+    class Meta:
+        model = Courses
+        fields = ("title",
+                  "price",
+                  "brief_desc",
+                  "table_of_content",
+                  )
+
+class EditPicture(forms.ModelForm):
+    class Meta:
+        model = Courses
+        fields = ('image',)
+
+class CreateCourse(forms.ModelForm):
+    class Meta:
+        model = Courses
+        exclude = ('teacher_id',
+                   'avg_rating',
+        )
+
+class AddVideo(forms.ModelForm):
+    class Meta:
+        model = Videos
+        exclude = ('course_id',)

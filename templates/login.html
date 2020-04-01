@@ -31,21 +31,23 @@
 
             <div class="row justify-content-center">
                 {% if messages %}
-                <div class="col-sm-12 messages">
+                <ul class="col-sm-12 messages" style="list-style:none;">
                     {% for message in messages %}
-                    <div{% if message.tags %} class="alert alert-{{ message.tags }} px-auto"{% endif %}>{{ message }}</div>
+                    <li class="alert alert-{{ message.tags }}">{{ message }}</li>
                     {% endfor %}
-                </div>
+                </ul>
                 {% endif %}
-              <div class="px-5">
+              <div class="col-sm-12">
               <form method="POST">
-                  <div class="col-12 mt-3 ml-5">
+                  <div class="col-sm-6 mt-3">
                     <p>Don't Have An Account? <a href="{% url "register" %}">Register HERE</a></p>
                   </div>
                   {% csrf_token %}
-
-                  {{form|crispy}}
-                  <div class="col-12">
+                  <div class="ml-3">
+                      {{form|crispy}}
+                  </div>
+                
+                  <div class="ml-3">
                       <input type="submit" value="Log In" class="btn btn-primary btn-lg px-5">
                   </div>
               </form>
