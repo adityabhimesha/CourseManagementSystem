@@ -45,7 +45,7 @@ def user_to_teacher(request):
         user_form.user_id = request.user
         user_form.save()
         
-        return redirect('/accounts/profile/edit-courses')
+        return redirect('/accounts/profile/my-courses')
 
     is_teacher = Teachers.objects.filter(user_id=request.user.id)
     if len(is_teacher) == 1:
