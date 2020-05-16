@@ -8,7 +8,6 @@ def redirect_home(request):
 
     return redirect("home/")
 
-
 def index_test(request):
 
     all_courses = Courses.objects.all()
